@@ -19,7 +19,8 @@ function submitTask(){
 
     let taskToDo = {
         task: $('#task').val(),
-        notes: $('#notes').val()
+        notes: $('#notes').val(),
+        complete: 'FALSE'
     }
 
     console.log('new task', taskToDo);
