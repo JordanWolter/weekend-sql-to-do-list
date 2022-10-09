@@ -1,9 +1,11 @@
-const { response } = require("express");
+//const { response } = require("express");
 
 console.log('client js');
 
 $(document).ready(function (){
     console.log('on ready');
+
+    getTask();
 
     clickListeners();
 });
@@ -11,7 +13,9 @@ $(document).ready(function (){
 function clickListeners(){
     $('#submitBtn').on('click', submitTask);
     $('#viewTask').on('click', '.deleteBtn', deleteTask);
+    $('#completeTask').on('click', '.deleteBtn', deleteTask);
     $('#viewTask').on('click', '.completeBtn', completeTask);
+
 };
 
 function submitTask(){
@@ -83,6 +87,7 @@ function deleteTask(){
     })
 };
 
+
 function completeTask(){
     console.log('complete task');
 
@@ -96,12 +101,18 @@ function completeTask(){
     }).then((response) => {
         console.log('update task');
 
+        console.log('response complete', $(this))
+
         getTask();
 
     }).catch((err) => {
         console.log('task failed', err);
 
     })
+
+    
+  
+
 };
 
 function clearInputs(){
@@ -113,14 +124,27 @@ function renderTask(list){
     console.log('render tasks');
 
     $('#viewTask').empty();
+    $('#completeTask').empty();
 
     for(let index of list){
-    $('#viewTask').append(`
-    <tr>
-    <td>${index.task}</td>
-    <td>${index.notes}</td>
-    <td><button type='click' class='completeBtn' data-id=${index.id}>Complete</button></td>
-    <td><button type='click' class='deleteBtn' data-id=${index.id}>End Task</button></td>
-    </tr>
-    `)};
+        console.log(index.complete);
+        if(index.complete === true){
+            $('#completeTask').append(`
+            <tr class="row">
+            <td class="taskColumn"><h3>${index.task}</h3></td>
+            <td class="notesColumn">${index.notes}</td>
+            <td class="deleteColumn"><button type='click' class='deleteBtn' data-id=${index.id}>Delete</button></td>
+            </tr>
+            `)
+        }else{
+            $('#viewTask').append(`
+            <tr class="row">
+            <td class="taskColumn"><h3>${index.task}<h3></td>
+            <td class="notesColumn">${index.notes}</td>
+            <td class="completeColumn"><button type='click' class='completeBtn' data-id=${index.id}>Complete</button></td>
+            <td class="deleteColumn"><button type='click' class='deleteBtn' data-id=${index.id}>Delete</button></td>
+            </tr>
+            `)
+        }
+    };
 };

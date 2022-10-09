@@ -6,24 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="vendors/jquery.js"></script>
     <script src="scripts/client.js"></script>
+    <link rel="stylesheet" href="style/style.css">
     <title>To-Do List</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <h1>Tasks To-Do</h1>
+    </header>
     <form>
         <input type="text" id="task" placeholder="Task">
         <input type="text" id="notes" placeholder="Notes">
         <button type="submit" id="submitBtn">Add Task</button>
     </form>
-    <table>
-        <thead>
-            <tr>
-            <th>Task</th>
-            <th>Notes</th>
+    <table class="table">
+        <thead class="tableHead">
+            <tr class="row">
+            <th id="taskList"><h2>Task</h2></th>
+            <th id="notesList"><h2>Notes</h2></th>
             </tr>
         </thead>
         <tbody id="viewTask">
  
+        </tbody>
+    </table>
+    <table class="table">
+        <thead class="tableHead">
+            <tr class="row">
+                <th class="completedColumn" id="completeHead"><h2>Completed</h2></th>
+            </tr>
+
+        </thead>
+        <tbody id="completeTask">
+
         </tbody>
     </table>
 </body>
